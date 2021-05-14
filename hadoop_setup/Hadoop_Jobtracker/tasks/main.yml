@@ -52,5 +52,5 @@
   local_action:
           copy
               content="{{ansible_facts['eth0']['ipv4']['address'] }}"
-              dest="./jt_ip.txt"
+              dest="../temp/jt_ip.txt"
 
