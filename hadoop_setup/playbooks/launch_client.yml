@@ -4,20 +4,20 @@
   vars_files:
   - nodes.txt
   tasks:
-  - name: "Provisioning Jobtracker..."
+  - name: "Provisioning Client..."
     ec2:
-      key_name: "akki"
-      instance_type: t2.micro
-      image: "ami-010aff33ed5991201"
+      key_name: "{{key}}"
+      instance_type: "{{type_instance}}"
+      image: "{{image_id}}"
       count: "{{number_of_instance}}"
-      region: "ap-south-1"
+      region: "{{region_name}}"
       assign_public_ip: yes
       instance_tags:
           Name: Client
-      group_id: "sg-000662ee3da06ba65"
+      group_id: "{{security_grp_id}}"
       aws_access_key: "{{ access_key }}"
       aws_secret_key: "{{ secret_key }}"
       state: present
       wait: yes
-      vpc_subnet_id: "subnet-99c8b7d5"
+      vpc_subnet_id: "{{subnet-id}}"
 
