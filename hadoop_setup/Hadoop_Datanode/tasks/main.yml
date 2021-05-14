@@ -1,0 +1,54 @@
+---
+# tasks file for Hadoop_Datanode
+- name: "Uploading  hadoop Software..."
+  copy:
+    src: "./hadoop-1.2.1-1.x86_64.rpm"
+    dest: "/root/hadoop.rpm"
+  run_once: True
+
+- name: "Uploading jdk Software..."
+  copy:
+    src: "./jdk-8u171-linux-x64.rpm"
+    dest: "/root/jdk.rpm"
+  run_once: True
+
+- name: "Installing JDK..."
+  shell:
+    cmd: "rpm -ivh /root/jdk.rpm"
+  ignore_errors: yes
+
+- name: "Installing Hadoop Software..."
+  shell:
+    cmd: "rpm -ivh --force /root/hadoop.rpm"
+  ignore_errors: yes
+
+- name: "Changing Core File..."
+  template:
+    src: "core-data.txt"
+    dest: "/etc/hadoop/core-site.xml"
+
+- name: "Making Folder..."
+  file:
+    path: "{{ datanode_folder }}"
+    state: directory
+
+- name: "Changing Hdfs file..."
+  template:
+    src: "hdfs-data.txt"
+    dest: "/etc/hadoop/hdfs-site.xml"
+
+- name: "Making Service Permanent..."
+  lineinfile:
+    path: "/etc/rc.d/rc.local"
+    line: "hadoop-daemon.sh start datanode"
+
+- name: "Making system file executable..."
+  file:
+    path: "/etc/rc.d/rc.local"
+    mode: u=rwx,g=rx,o=rx
+
+- name: "Starting Service..."
+  shell:
+    cmd: "hadoop-daemon.sh start datanode"
+  run_once: True
+

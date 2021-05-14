@@ -1,0 +1,4 @@
+---
+# vars file for Hadoop_Tasktracker
+jobtracker_port: 9002
+jobtracker_ip: 172.31.15.148

@@ -1,0 +1,4 @@
+---
+# vars file for Hadoop_Namenode
+namenode_port: 9001
+namenode_folder: /nn

@@ -1,0 +1,49 @@
+---
+- name: "LocalHost WOrking..."
+  hosts: localhost
+  tasks:
+#  - name: "Python Module Installing..."
+#    shell:
+#      cmd: "pip3 install gdown"
+
+#  - name: "Downloading hadoop Software..."
+#    shell:
+#      cmd: "gdown --id 1l4Mv2ngXMacO_Cvaqw2SEh0qIi9q7Zl_"
+#    run_once: True
+
+#  - name: "Downloading jdk Software..."
+#    shell:
+#      cmd: "gdown --id 1KV7l0ApxLEWR7vu_P3ovFJdCS1XExq5q"
+#    run_once: True
+
+  - name: "Variable File Sharing..."
+    shell:
+      cmd: "cat ../temp/namenode_ip.txt"
+    register: "nn_ip"
+
+  - name: "Namenode IP storing..."
+    lineinfile:
+      path: "../Hadoop_Client/vars/main.yml"
+      line: "{{ nn_ip.stdout }}"
+ 
+  - name: "Variable File Sharing..."
+    shell:
+      cmd: "cat ../temp/jobtracker_ip.txt"
+    register: "jt_ip"
+
+  - name: "Jobtracker IP storing..."
+    lineinfile:
+      path: "../Hadoop_Client/vars/main.yml"
+      line: "{{ jt_ip.stdout }}"
+
+  
+  - name: "Massage..."
+    debug:
+      msg: "It'll take sometime to configure all the things..."
+
+
+- name: "Client Configuring..."
+  hosts: tag_Name_Client
+  roles:
+  - role: "Hadoop_Client"
+

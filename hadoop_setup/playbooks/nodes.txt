@@ -1,0 +1,9 @@
+access_key: "AKRPYDJBPP"
+secret_key: "PzEtEg/NUwouFCv"
+image_id: "ami-010aff33ed5991201"
+security_grp_id: "sg-000662ee3da06ba65"
+subnet_id: "subnet-99c8b7d5"
+region_name: "ap-south-1"
+number_of_instance: 1
+key: "akki"
+type_instance: "t2.micro"

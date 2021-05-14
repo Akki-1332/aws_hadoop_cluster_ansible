@@ -1,0 +1,5 @@
+---
+# vars file for Hadoop_Namenode
+namenode_port: 9001
+jobtracker_port: 9002
+namenode_ip: 172.31.7.203

@@ -1,0 +1,23 @@
+---
+- hosts: localhost
+  tasks:
+  vars_files:
+  - nodes.txt
+  tasks:
+  - name: "Provisioning Tasktracker..."
+    ec2:
+      key_name: "{{key}}"
+      instance_type: "{{type_instance}}"
+      image: "{{image_id}}"
+      count: "{{number_of_instance}}"
+      region: "{{region_name}}"
+      assign_public_ip: yes
+      instance_tags:
+          Name: Tasktracker
+      group_id: "{{security_grp_id}}"
+      aws_access_key: "{{ access_key }}"
+      aws_secret_key: "{{ secret_key }}"
+      state: present
+      wait: yes
+      vpc_subnet_id: "{{subnet_id}}"
+

@@ -1,0 +1,23 @@
+---
+- hosts: localhost
+  tasks:
+  vars_files:
+  - nodes.txt
+  tasks:
+  - name: "Provisioning Jobtracker..."
+    ec2:
+      key_name: "akki"
+      instance_type: t2.micro
+      image: "ami-010aff33ed5991201"
+      count: "{{number_of_instance}}"
+      region: "ap-south-1"
+      assign_public_ip: yes
+      instance_tags:
+          Name: Client
+      group_id: "sg-000662ee3da06ba65"
+      aws_access_key: "{{ access_key }}"
+      aws_secret_key: "{{ secret_key }}"
+      state: present
+      wait: yes
+      vpc_subnet_id: "subnet-99c8b7d5"
+
