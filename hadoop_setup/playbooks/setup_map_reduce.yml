@@ -1,0 +1,76 @@
+---
+- name: "LocalHost Working..."
+  hosts: localhost
+  tasks:
+#  - name: "Python Module Installing..."
+#    shell:
+#      cmd: "pip3 install gdown"
+
+#  - name: "Downloading hadoop Software..."
+#    shell:
+#      cmd: "gdown --id 1l4Mv2ngXMacO_Cvaqw2SEh0qIi9q7Zl_"
+#    run_once: True
+
+#  - name: "Downloading jdk Software..."
+#    shell:
+#      cmd: "gdown --id 1KV7l0ApxLEWR7vu_P3ovFJdCS1XExq5q"
+#    run_once: True
+
+  - name: "Variable File Sharing..."
+    shell:
+      cmd: "cat ../temp/namenode_ip.txt"
+    register: "nn_ip"
+
+  - name: "Namenode IP storing..."
+    lineinfile:
+      path: "../Hadoop_Jobtracker/vars/main.yml"
+      line: "{{ nn_ip.stdout }}"
+
+
+  - name: "Check"
+    debug:
+      msg: "It'll work"
+
+
+- name: "Jobtracker Configuring..."
+  hosts: tag_Name_Jobtracker
+  roles:
+  - role: "Hadoop_Jobtracker"
+
+- name: "Storing Metadata..."
+  hosts: localhost
+  tasks:
+  - name: "Saving Information for further Use..."
+    shell:
+      cmd: "cat ../temp/jt_ip.txt"
+    register: y
+
+  - name: "Saving Data Final..."
+    copy:
+      content: "jobtracker_ip: {{ y.stdout }}"
+      dest: "../temp/jobtracker_ip.txt"
+
+
+- name: "LocalHost WOrking..."
+  hosts: localhost
+  tasks:
+  - name: "Variable File Sharing..."
+    shell:
+      cmd: "cat ../temp/jobtracker_ip.txt"
+    register: "jt_ip"
+
+  - name: "Jobtracker IP storing..."
+    lineinfile:
+      path: "../Hadoop_Tasktracker/vars/main.yml"
+      line: "{{ jt_ip.stdout }}"
+
+
+  - name: "Check"
+    debug:
+      msg: "It'll work"
+
+
+- name: "Tasktracker Configuring..."
+  hosts: tag_Name_Tasktracker
+  roles:
+  - role: "Hadoop_Tasktracker"
