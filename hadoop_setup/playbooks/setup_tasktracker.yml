@@ -2,19 +2,19 @@
 - name: "LocalHost WOrking..."
   hosts: localhost
   tasks:
-#  - name: "Python Module Installing..."
-#    shell:
-#      cmd: "pip3 install gdown"
+  - name: "Python Module Installing..."
+    shell:
+      cmd: "pip3 install gdown"
 
-#  - name: "Downloading hadoop Software..."
-#    shell:
-#      cmd: "gdown --id 1l4Mv2ngXMacO_Cvaqw2SEh0qIi9q7Zl_"
-#    run_once: True
+  - name: "Downloading hadoop Software..."
+    shell:
+      cmd: "gdown --id 1l4Mv2ngXMacO_Cvaqw2SEh0qIi9q7Zl_"
+    run_once: True
 
-#  - name: "Downloading jdk Software..."
-#    shell:
-#      cmd: "gdown --id 1KV7l0ApxLEWR7vu_P3ovFJdCS1XExq5q"
-#    run_once: True
+  - name: "Downloading jdk Software..."
+    shell:
+      cmd: "gdown --id 1KV7l0ApxLEWR7vu_P3ovFJdCS1XExq5q"
+    run_once: True
 
   - name: "Variable File Sharing..."
     shell:
