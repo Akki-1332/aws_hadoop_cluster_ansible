@@ -1,4 +1,8 @@
 # aws_hadoop_cluster_ansible
+=> Benefits of using this repository..
+1. You can clone it anywhere , it will run without any error.
+2. You don't require to know anything about Ansible or Hadoop.
+
 This repository will help you to setup you Map-Reduce and HDFS cluster on AWS with the help of ANSIBLE Playbooks.
 ## You need to change some of the files 📂 
 1. `/hadoop_setup/playbook/nodes.txt` 
